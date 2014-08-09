@@ -351,6 +351,33 @@ struct arch_flag *specific_arch_flag)
                 return(1);
 	    }
 	    break;
+	case CPU_TYPE_X86_64:
+	    switch(host_basic_info.cpu_subtype){
+	    case CPU_SUBTYPE_X86_64_ALL:
+		if(family_arch_flag != NULL){
+		    family_arch_flag->name = "x86_64";
+		    family_arch_flag->cpusubtype = CPU_SUBTYPE_X86_64_ALL;
+		}
+		if(specific_arch_flag != NULL)
+		    specific_arch_flag->name = "x86_64";
+		return(1);
+	    default:
+		if(family_arch_flag != NULL){
+		    family_arch_flag->name = "x86_64";
+		    family_arch_flag->cpusubtype = CPU_SUBTYPE_X86_64_ALL;
+		}
+		if(specific_arch_flag != NULL){
+		    specific_arch_flag->name =
+			savestr("Intel family 12 model 12345678");
+		    if(specific_arch_flag->name != NULL)
+			sprintf(specific_arch_flag->name,
+			    "Intel family %u model %u", 
+			CPU_SUBTYPE_INTEL_FAMILY(host_basic_info.cpu_subtype),
+			CPU_SUBTYPE_INTEL_MODEL(host_basic_info.cpu_subtype));
+		}
+	        return(1);
+	    }
+	    break;
 	case CPU_TYPE_I860:
 	    switch(host_basic_info.cpu_subtype){
 	    case CPU_SUBTYPE_I860_ALL:
