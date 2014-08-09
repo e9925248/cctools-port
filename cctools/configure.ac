@@ -82,10 +82,17 @@ esac
 AC_DEFINE(__STDC_LIMIT_MACROS)
 AC_DEFINE(__STDC_CONSTANT_MACROS)
 
-
+base="${bindir}"
+result=
+while test "${libexecdir#"$base"/}" = "${libexecdir}"
+do
+      base="`dirname "${base}"`"
+      result="../${result}"
+done
+result="${result}${libexecdir#"$base"/}"
 
 #for as wrapper.
-AC_SUBST([ASLIBEXECDIR], ['${libexecdir}/as'])
+AC_SUBST([ASLIBEXECDIR], ["${result}/as"])
 
 #for ld_class involk in ld64 and other command call.
 if test "$target_alias"; then
