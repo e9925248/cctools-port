@@ -18,6 +18,8 @@
 #include <sys/sysctl.h>
 #endif
 
+extern char* progname;
+
 int _NSGetExecutablePath(char *path, unsigned int *size)
 {
 #ifdef __FreeBSD__
@@ -41,8 +43,17 @@ int _NSGetExecutablePath(char *path, unsigned int *size)
         path[ret_size]=0;
         return 0;
    }
+   else if (progname)
+   {
+        strncpy(path, progname, bufsize - 1);
+        path[bufsize] = 0;
+	*size = strlen(path);
+        return 0;
+   }
    else
-    return -1;
+   {
+	return -1;
+   }
 #endif
 }
 
