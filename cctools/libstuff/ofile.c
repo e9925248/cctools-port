@@ -403,7 +403,7 @@ void *cookie)
 		 * If runing as a 64-bit binary and on an Intel x86 host
 		 * default to 64-bit.
 		 */
-		if(host_arch_flag.cputype == CPU_TYPE_I386)
+		if(0 && host_arch_flag.cputype == CPU_TYPE_I386)
 		    host_arch_flag =
 			*get_arch_family_from_cputype(CPU_TYPE_X86_64);
 #endif /* __LP64__ */

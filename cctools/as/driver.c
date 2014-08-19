@@ -202,7 +202,7 @@ char **envp)
 		 * If runing as a 64-bit binary and on an Intel x86 host
 		 * default to the 64-bit assember.
 		 */
-		if(arch_flag.cputype == CPU_TYPE_I386)
+		if(0 && arch_flag.cputype == CPU_TYPE_I386)
 		    arch_flag = *get_arch_family_from_cputype(CPU_TYPE_X86_64);
 #endif /* __LP64__ */
 		arch_name = arch_flag.name;
